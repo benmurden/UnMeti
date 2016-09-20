@@ -8,7 +8,12 @@ domain = 'photo.kankouyohou.com'
 prefectures_path = '/json/prefectures.json'
 
 response = urllib2.urlopen('{prot}://{domain}{path}'.format(prot=protocol, domain=domain, path=prefectures_path))
-data = json.loads(response.read())
+content = response.read()
+with open('prefectures.json', 'w') as out:
+    out.write(content)
+    out.close()
+
+data = json.loads(content)
 
 def make_sure_path_exists(path):
     try:
